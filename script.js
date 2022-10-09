@@ -2,6 +2,7 @@ var main = document.getElementById("grid");
 var link = document.getElementById("imgaddress");
 var titleinput = document.getElementById("title");
 var textinput = document.getElementById("text");
+var searchinput = document.getElementById("searchCard");
 
 function AddCard() {
   if (
@@ -16,6 +17,7 @@ function AddCard() {
     image.src = link.value;
 
     var title = document.createElement("h3");
+    title.className = "cardtitle";
     title.innerHTML = titleinput.value;
 
     var description = document.createElement("p");
@@ -38,4 +40,25 @@ function AddCard() {
 
 function DeleteCard(e) {
   e.target.parentElement.remove();
+}
+
+function SearchCard() {
+  var titles = document.getElementsByClassName("cardtitle");
+  if (searchinput.value != "") {
+    for (let index = 0; index < titles.length; index++) {
+      if (
+        titles[index].innerHTML
+          .toLowerCase()
+          .includes(searchinput.value.toLowerCase())
+      ) {
+        titles[index].parentElement.style = "display: block;";
+      } else {
+        titles[index].parentElement.style = "display: none;";
+      }
+    }
+  } else {
+    for (let index = 0; index < titles.length; index++) {
+      titles[index].parentElement.style = "display: block;";
+    }
+  }
 }
